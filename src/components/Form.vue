@@ -491,7 +491,7 @@ export default {
     }
     .active {
         background: #FFFFFF;
-        border: 2px solid #0061d9;
+        box-shadow: inset 0 0 0 2px #0061d9;
     }
     .input {
         padding: .3rem;
