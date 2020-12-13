@@ -4,34 +4,46 @@
       <form class="form" @submit.prevent="formCheck">
         <div class="form-group input-form">
             <span>Фамилия</span>
-            <input type="text" placeholder="Иванов" class="input" v-model.trim="form.secondName">
+            <input type="text" placeholder="Иванов" class="input" :class="$v.form.secondName.$error ? 'invalid': ''" v-model.trim="form.secondName">
             <p
              v-if="$v.form.secondName.$dirty && !$v.form.secondName.required"
-             >*Это обязательное поле
+             >{{ required }}
              </p>
              <p
              v-if="$v.form.secondName.$dirty && !$v.form.secondName.minLength"
-             >*Слишком мало букв
+             >{{ minLength }}
+             </p>
+             <p
+             v-if="$v.form.secondName.$dirty && !$v.form.secondName.maxLength"
+             >{{ maxLength }}
              </p>
         </div>
         <div class="form-group input-form" >
             <span>Имя</span>
-            <input type="text" placeholder="Иван" class="input" v-model.trim="form.firstName">
+            <input type="text" placeholder="Иван" class="input" :class="$v.form.firstName.$error ? 'invalid': ''" v-model.trim="form.firstName">
             <p
              v-if="$v.form.firstName.$dirty && !$v.form.firstName.required"
-             >*Это обязательное поле
+             >{{ required }}
              </p>
              <p
              v-if="$v.form.firstName.$dirty && !$v.form.firstName.minLength"
-             >*Слишком мало букв
+             >{{ minLength }}
+             </p>
+             <p
+             v-if="$v.form.firstName.$dirty && !$v.form.firstName.maxLength"
+             >{{ maxLength }}
              </p>
         </div>
         <div class="form-group input-form" >
             <span>Отчество</span>
-            <input type="text" placeholder="Иванович" class="input" v-model.trim="form.thirdName">
+            <input type="text" placeholder="Иванович" class="input" :class="$v.form.thirdName.$error ? 'invalid': ''" v-model.trim="form.thirdName">
             <p
              v-if="$v.form.thirdName.$dirty && !$v.form.thirdName.minLength"
-             >*Слишком мало букв
+             >{{ minLength }}
+             </p>
+             <p
+             v-if="$v.form.thirdName.$dirty && !$v.form.thirdName.maxLength"
+             >{{ maxLength }}
              </p>
         </div>
         <div class="form-group date">
@@ -39,50 +51,62 @@
             <div class="input-numbers">
                 <div class="number-fields">
                     <span>День</span>
-                    <input type="text" placeholder="01" class="input input-number" v-model.trim="form.day">
+                    <input type="number"
+                     placeholder="01"
+                     class="input input-number"
+                     :class="$v.form.day.$error ? 'invalid': ''"
+                     v-model.trim="form.day">
                     <p
                     v-if="$v.form.day.$dirty && !$v.form.day.required"
-                    > *Это обязательное поле
+                    > {{ required }}
                     </p>
                     <p
                     v-if="$v.form.day.$dirty && !$v.form.day.minLength"
-                    > *Слишком мало цифр
+                    > {{ minLength }}
                     </p>
                     <p
                     v-if="$v.form.day.$dirty && !$v.form.day.maxLength"
-                    > *Слишком много цифр 
+                    > {{ maxLength }} 
                     </p>
                 </div>
                 <div class="number-fields">
                     <span>Месяц</span>
-                    <input type="text" placeholder="01" class="input input-number" v-model.trim="form.month">
+                    <input type="number"
+                     placeholder="01"
+                     class="input input-number"
+                     :class="$v.form.month.$error ? 'invalid': ''"
+                     v-model.trim="form.month">
                     <p
                     v-if="$v.form.month.$dirty && !$v.form.month.required"
-                    > *Это обязательное поле
+                    > {{ required }}
                     </p>
                     <p
                     v-if="$v.form.month.$dirty && !$v.form.month.minLength"
-                    > *Слишком мало цифр 
+                    > {{ minLength }} 
                     </p>
                     <p
                     v-if="$v.form.month.$dirty && !$v.form.month.maxLength"
-                    > *Слишком много цифр 
+                    > {{ maxLength }} 
                     </p>
                 </div>
                 <div class="number-fields">
                     <span>Год</span>
-                    <input type="text" placeholder="2001" class="input input-number" v-model.trim="form.year">
+                    <input type="number"
+                     placeholder="2001"
+                     class="input input-number"
+                     :class="$v.form.year.$error ? 'invalid': ''"
+                     v-model.trim="form.year">
                     <p
                     v-if="$v.form.year.$dirty && !$v.form.year.required"
-                    > *Это обязательное поле
+                    > {{ required }}
                     </p>
                     <p
                     v-if="$v.form.year.$dirty && !$v.form.year.minLength"
-                    > *Слишком мало цифр
+                    > {{ minLength }}
                     </p>
                     <p
                     v-if="$v.form.year.$dirty && !$v.form.year.maxLength"
-                    > *Слишком много цифр
+                    > {{ maxLength }}
                     </p>
                 </div>
             </div>
@@ -93,19 +117,24 @@
             <div class="number-form input_form">
                 <div class="number-field">
                     <span class="plus-seven">+7 </span>
-                    <input type="text" placeholder="1234567890" class="input input-phone" v-model.trim="form.number">
+                    <input
+                     type="number"
+                     placeholder="1234567890"
+                     class="input input-phone"
+                     :class="$v.form.number.$error ? 'invalid': ''"
+                     v-model.trim="form.number">
                 </div>
                 <p
                     v-if="$v.form.number.$dirty && !$v.form.number.required"
-                    >*Это обязательное поле
+                    >{{ required }}
                 </p>
                 <p
                     v-if="$v.form.number.$dirty && !$v.form.number.minLength"
-                    >*Слишком мало цифр
+                    >{{ minLength }}
                 </p>
                 <p
                     v-if="$v.form.number.$dirty && !$v.form.number.maxLength"
-                    >*Слишком много цифр
+                    >{{ maxLength }}
                 </p>
             </div>
         </div>
@@ -122,7 +151,7 @@
         </div>
         <div class="form-group selectors">
             <span>Группа клиентов </span>
-            <select name="" id="" multiple v-model="form.chosenClientGroups" class="select">
+            <select name="" id="" multiple class="select" :class="$v.form.chosenClientGroups.$error ? 'invalid': ''" v-model="form.chosenClientGroups">
                 <option
                  v-for="(group, index) in form.clientGroups"
                  :key="index"
@@ -133,7 +162,7 @@
             </select>
             <p
              v-if="$v.form.chosenClientGroups.$dirty && !$v.form.chosenClientGroups.required"
-             >*Это обязательное поле
+             >{{ required }}
              </p>
         </div>
         <div class="form-group selectors">
@@ -168,10 +197,10 @@
         </div>
         <div class="form-group input-form">
             <span>Город</span>
-            <input type="text" class="input" v-model.trim="form.city">
+            <input type="text" class="input" :class="$v.form.city.$error ? 'invalid': ''" v-model.trim="form.city">
             <p
              v-if="$v.form.city.$dirty && !$v.form.city.required"
-             >*Это обязательное поле
+             >{{ required }}
              </p>
         </div>
         <div class="form-group input-form">
@@ -185,7 +214,7 @@
         <p class="form-name">Паспорт</p>
         <div class="form-group input-form">
             <span>Тип документа</span>
-            <select type="text" class="input" v-model.trim="form.documentType">
+            <select type="text" class="input" :class="$v.form.documentType.$error ? 'invalid': ''" v-model.trim="form.documentType">
                 <option 
                  v-for="(document, index) in form.documentTypes"
                  :key="index"
@@ -195,23 +224,23 @@
             </select>
             <p
              v-if="$v.form.documentType.$dirty && !$v.form.documentType.required"
-             >*Это обязательное поле
+             >{{ required }}
              </p>
         </div>
         <div class="form-group input-form">
             <span>Серия</span>
-            <input type="text" class="input" v-model.trim="form.documentSeries">
+            <input type="number" class="input" v-model.trim="form.documentSeries">
         </div>
         <div class="form-group input-form">
             <span>Номер</span>
-            <input type="text" class="input" v-model.trim="form.documentNumber">
+            <input type="number" class="input" v-model.trim="form.documentNumber">
         </div>
         <div class="form-group input-form">
             <span>Кем выдан</span>
             <input type="text" class="input" v-model.trim="form.issuedBy">
             <p
              v-if="$v.form.firstName.$dirty && !$v.form.firstName.minLength"
-             >*Слишком мало букв
+             >{{ minLength }}
              </p>
         </div>
         <div class="form-group date">
@@ -219,50 +248,50 @@
             <div class="input-numbers">
                 <div class="number-fields">
                     <span>День</span>
-                    <input type="text" placeholder="01" class="input-number input" v-model.trim="form.issueDay">
+                    <input type="number" placeholder="01" class="input-number input" :class="$v.form.issueDay.$error ? 'invalid': ''" v-model.trim="form.issueDay">
                     <p
                     v-if="$v.form.issueDay.$dirty && !$v.form.issueDay.required"
-                    >*Это обязательное поле
+                    >{{ required }}
                     </p>
                     <p
                     v-if="$v.form.issueDay.$dirty && !$v.form.issueDay.minLength"
-                    >*Слишком мало цифр
+                    >{{ minLength }}
                     </p>
                     <p
                     v-if="$v.form.issueDay.$dirty && !$v.form.issueDay.maxLength"
-                    >*Слишком много цифр
+                    >{{ maxLength }}
                     </p>
                 </div>
                 <div class="number-fields">
                     <span>Месяц</span>
-                    <input type="text" placeholder="01" class="input-number input" v-model.trim="form.issueMonth">
+                    <input type="number" placeholder="01" class="input-number input" :class="$v.form.issueMonth.$error ? 'invalid': ''" v-model.trim="form.issueMonth">
                     <p
                     v-if="$v.form.issueMonth.$dirty && !$v.form.issueMonth.required"
-                    >*Это обязательное поле
+                    >{{ required }}
                     </p>
                     <p
                     v-if="$v.form.issueMonth.$dirty && !$v.form.issueMonth.minLength"
-                    >*Слишком мало цифр
+                    >{{ minLength }}
                     </p>
                     <p
                     v-if="$v.form.issueMonth.$dirty && !$v.form.issueMonth.maxLength"
-                    >*Слишком много цифр
+                    >{{ maxLength }}
                     </p>
                 </div>
                 <div class="number-fields">
                     <span>Год</span>
-                    <input type="text" placeholder="2001" class="input-number input" v-model.trim="form.issueYear">
+                    <input type="number" placeholder="2001" class="input-number input" :class="$v.form.issueYear.$error ? 'invalid': ''" v-model.trim="form.issueYear">
                     <p
                     v-if="$v.form.issueYear.$dirty && !$v.form.issueYear.required"
-                    >*Это обязательное поле
+                    >{{ required }}
                     </p>
                     <p
                     v-if="$v.form.issueYear.$dirty && !$v.form.issueYear.minLength"
-                    >*Слишком мало цифр
+                    >{{ minLength }}
                     </p>
                     <p
                     v-if="$v.form.issueYear.$dirty && !$v.form.issueYear.maxLength"
-                    >*Слишком много цифр
+                    >{{ maxLength }}
                     </p>
                 </div>
              </div>
@@ -287,6 +316,9 @@ export default {
     },
     data() {
         return {
+            required: '*Обязательное поле',
+            minLength: '*Слишком мало символов',
+            maxLength: '*Слишком много символов',
             formComplete: false,
             activeRadio: false,
             activeCheckbox: false,
@@ -362,9 +394,9 @@ export default {
     },
     validations: {
         form: {
-            firstName: { required, minLength: minLength(1) },
-            secondName: { required, minLength: minLength(1) },
-            thirdName: { minLength: minLength(1) },
+            firstName: { required, minLength: minLength(1), maxLength: maxLength(20) },
+            secondName: { required, minLength: minLength(1), maxLength: maxLength(20) },
+            thirdName: { minLength: minLength(1), maxLength: maxLength(20) },
             number: { required, minLength: minLength(10), maxLength: maxLength(10) },
             day: { required, minLength: minLength(2), maxLength: maxLength(2) },
             month: { required, minLength: minLength(2), maxLength: maxLength(2) },
@@ -382,12 +414,12 @@ export default {
     },
     methods: {
         formCompleteToggle() {
-            return this.formComplete = !this.formComplete
+                this.formComplete = !this.formComplete
         },
         formCheck() {
             this.$v.form.$touch()
             if (this.$v.form.$error) {
-                console.log('succeed')
+                console.log('error')
             } else {
                 this.formCompleteToggle()
             }
@@ -466,6 +498,7 @@ export default {
         padding: 2rem 0;
         align-items: center;
         justify-content: left;
+        user-select: none;   
     }
     .check {
         margin: 0 1em;
@@ -474,6 +507,7 @@ export default {
     .gender {
         display: flex;
         flex-direction: column;
+        user-select: none;   
     }
     .selectors {
         align-items: left;
@@ -526,5 +560,14 @@ export default {
         :active {
             border: none;
         }
+    }
+    .invalid {
+        border: 1px solid rgba(246, 71, 71, 1);
+        border-radius: 1px;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
     }
 </style>

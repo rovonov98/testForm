@@ -27,7 +27,7 @@ export default {
         position: fixed;
         z-index: 3;
         flex-direction: column;
-        background: #FFF;
+        background: #FFFFFF;
         border: 1px solid #0061d9;
         border-radius: 8px;
         top: 45%;
@@ -47,9 +47,7 @@ export default {
         font-size: 1.5rem;
         border-radius: 8px;
         margin: 1rem;
-        :active {
-            border: none;
-        }
+        cursor: pointer;
     }
     .cancel-button {
         padding: .8rem;
@@ -59,5 +57,6 @@ export default {
         font-size: 1.5rem;
         border-radius: 8px;
         margin: 1rem;
+        cursor: pointer;
     }
 </style>
